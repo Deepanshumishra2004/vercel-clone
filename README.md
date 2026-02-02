@@ -1,107 +1,96 @@
-DeployX 🚀
+# 🚀 DeployX
 
-DeployX is a Vercel-like platform for developers to build, deploy, and scale apps instantly on Kubernetes. Push your Git repo, watch real-time logs, and scale automatically — all powered by modern cloud-native architecture.
+**DeployX** is a Vercel-like platform that allows developers to **build, deploy, and scale apps instantly** on Kubernetes. Push your Git repo, watch **real-time logs**, and scale automatically — all powered by modern cloud-native architecture.  
 
-🌟 Features
-
-User signup/signin with JWT authentication.
-
-Create projects with Git repo, subdomain, and optional custom domain.
-
-Trigger deployments on Kubernetes with dynamic Job creation.
-
-Stream real-time deployment logs using Kafka + ClickHouse.
-
-Dashboard to view projects and deployment status.
-
-Dark/light mode frontend built with Next.js + TailwindCSS.
-
-🏗 Architecture
-
-Backend:
-
-Express.js — REST API for auth, projects, deployments.
-
-Prisma + PostgreSQL — Store users, projects, deployments.
-
-ClickHouse — Store high-performance deployment logs.
-
-Kafka — Real-time log streaming.
-
-Kubernetes — Deploy apps via dynamic Jobs.
-
-Mustache + YAML — Generate Kubernetes Job manifests dynamically.
-
-Frontend:
-
-Next.js + React — Modern, SSR-ready frontend.
-
-TailwindCSS — Minimalistic, responsive styling.
-
-Framer Motion — Smooth animations.
-
-Deployment Flow:
-
-User creates a project in the frontend.
-
-Backend validates and stores project in database.
-
-Kubernetes Job YAML is generated using Mustache template.
-
-Job is deployed to Kubernetes cluster.
-
-Kafka streams logs into ClickHouse.
-
-Frontend displays live logs and deployment status.
-
-🛠 Tech Stack
-Layer	Technology
-Backend	Node.js, Express, Prisma, PostgreSQL
-Deployment	Kubernetes, YAML, Mustache
-Logging	Kafka, ClickHouse
-Frontend	Next.js, React, TailwindCSS, Framer Motion
-Authentication	JWT, Bcrypt
-DevOps	Docker, Kubernetes Jobs
-⚡ Setup & Installation
-
-Clone Repo
-
-git clone https://github.com/<your-username>/deployx.git
-cd deployx
+![DeployX Banner](https://user-images.githubusercontent.com/your-user-id/deployx-banner.png)  
 
 
-Install Dependencies
+## 🌟 Features
 
+- **Authentication:** User signup/signin with JWT and Bcrypt.
+- **Project Management:** Create projects with Git repo, subdomain, and optional custom domain.
+- **Dynamic Deployments:** Trigger deployments on Kubernetes via dynamic Jobs.
+- **Real-time Logs:** Stream logs using Kafka + ClickHouse.
+- **Dashboard:** View projects, deployment status, and logs in real-time.
+- **Frontend:** Dark/light mode with responsive Next.js + TailwindCSS.
+- **Smooth Animations:** Framer Motion for seamless UI interactions.
+
+---
+
+## 🏗 Architecture
+
+### Backend
+- **Node.js + Express.js** — REST API for authentication, projects, and deployments.
+- **Prisma + PostgreSQL** — Store users, projects, and deployments.
+- **ClickHouse** — High-performance storage for deployment logs.
+- **Kafka** — Real-time log streaming.
+- **Kubernetes** — Deploy apps via dynamic Jobs.
+- **Mustache + YAML** — Generate Kubernetes Job manifests dynamically.
+
+### Frontend
+- **Next.js + React** — Modern SSR-ready frontend.
+- **TailwindCSS** — Minimalistic, responsive styling.
+- **Framer Motion** — Smooth animations for better UX.
+
+---
+
+## ⚡ Deployment Flow
+
+1. User creates a project in the frontend.
+2. Backend validates and stores the project in the database.
+3. Kubernetes Job YAML is generated using Mustache template.
+4. Job is deployed to the Kubernetes cluster.
+5. Kafka streams logs into ClickHouse.
+6. Frontend displays live logs and deployment status.
+
+---
+
+## 🛠 Tech Stack
+
+| Layer         | Technology                                      |
+|---------------|------------------------------------------------|
+| Backend       | Node.js, Express, Prisma, PostgreSQL           |
+| Deployment    | Kubernetes, YAML, Mustache                     |
+| Logging       | Kafka, ClickHouse                              |
+| Frontend      | Next.js, React, TailwindCSS, Framer Motion    |
+| Authentication| JWT, Bcrypt                                    |
+| DevOps        | Docker, Kubernetes Jobs                        |
+
+---
+
+## ⚡ Setup & Installation
+
+### Clone Repository
+```bash
+git clone https://github.com/Deepanshumishra2004/vercel-clone.git
+cd vercel-clone
+Install Backend Dependencies
+bash
+Copy code
 npm install
-
-
 Environment Variables
+Create a .env file:
 
-Create .env file:
-
+env
+Copy code
 DATABASE_URL="postgresql://user:password@localhost:5432/deployx"
 JWT_SECRET="your_jwt_secret"
 CLICKHOUSE_PASSWORD="your_clickhouse_password"
 KAFKA_PASSWORD="your_kafka_password"
-
-
 Run Backend
-
+bash
+Copy code
 npm run dev
-
-
 Frontend
-
+bash
+Copy code
 cd frontend
 npm install
 npm run dev
-
-
 Kubernetes Cluster
-
 Ensure kubectl is configured.
 
-Jobs template is in kubernetes/jobs.yml.
+Job template is in kubernetes/jobs.yml.
 
 📚 API Endpoints
 Method	Endpoint	Description
@@ -113,15 +102,14 @@ GET	/project/:id	Get project details
 POST	/deploy	Trigger deployment
 GET	/deploy/:id	Get deployment logs
 GET	/deployment/:id	Get logs from ClickHouse
+
 📝 Deployment Logs Flow
+Kafka streams container logs from Kubernetes Jobs → ClickHouse stores logs → Backend consumer listens to Kafka → Updates deployment status.
 
-Kafka streams container logs from Kubernetes Jobs.
-
-ClickHouse stores logs for real-time querying.
-
-Backend consumer listens to Kafka topics, stores logs, updates deployment status.
-
+ts
+Copy code
 const consumer = kafka.consumer({ groupId: 'api-server-logs-consumer' });
+
 await consumer.run({
   eachBatch: async ({ batch, resolveOffset }) => {
     for (const message of batch.messages) {
@@ -130,37 +118,47 @@ await consumer.run({
     }
   }
 });
-
 🎨 Frontend
-
 Built with Next.js.
 
 Responsive design with TailwindCSS.
 
-Smooth animations using Framer Motion.
+Smooth animations with Framer Motion.
 
-Dashboard to manage projects, view deployments, and live logs.
+Dashboard for managing projects, viewing deployments, and live logs.
 
-📌 Key Lessons
-
-Real-time log streaming is crucial for developer experience.
+📌 Key Lessons Learned
+Real-time log streaming improves developer experience.
 
 Dynamic Kubernetes Job generation simplifies deployments.
 
-Full-stack TypeScript improves type safety across backend and frontend.
+Full-stack TypeScript ensures type safety across backend and frontend.
 
-Auth middleware ensures route protection.
+Authentication middleware secures protected routes.
 
 🔗 Links
-
-GitHub: (https://github.com/Deepanshumishra2004/vercel-clone)
+GitHub Repository: https://github.com/Deepanshumishra2004/vercel-clone
 
 Live Demo: https://deployx-indol.vercel.app/
 
 🤝 Contributing
+Contributions are welcome! Feel free to:
 
-Feel free to contribute, raise issues, or request features.
+Raise issues
+
+Request features
+
+Submit pull requests
 
 📄 License
-
 MIT License © 2026 Deepanshu Mishra
+
+
+
+
+
+
+
+
+
+
