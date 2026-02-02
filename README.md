@@ -89,6 +89,7 @@ npm install
 npm run dev
 Kubernetes Cluster
 Ensure kubectl is configured.
+```
 
 Job template is in kubernetes/jobs.yml.
 
