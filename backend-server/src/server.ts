@@ -34,7 +34,7 @@ const batchApi = kc.makeApiClient(k8s.BatchV1Api)
 const kafkaPemPath = path.join(__dirname, "../kafka.pem");
 
 const client = createClient({
-    host: 'https://avnadmin:AVNS__MjyhLHOo2Z4I8ezd-O@clickhouse-39c73b4d-deepanshumishra775-8503.i.aivencloud.com:28314',
+    host: process.env.HOST,
     database: 'default',
     username: 'avnadmin',
     password: process.env.CLICKHOUSE_PASSWORD!
