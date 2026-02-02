@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* ===================== */
+/* Default — Dark Mode   */
+/* ===================== */
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+
+  --card: #0f0f0f;
+  --card-border: #1f1f1f;
+
+  --muted: #9ca3af;
+  --muted-foreground: #6b7280;
+
+  --navbar-height: 72px;
+}
+
+/* ===================== */
+/* Light Mode            */
+/* ===================== */
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #000000;
+
+  --card: #f9fafb;
+  --card-border: #e5e7eb;
+
+  --muted: #4b5563;
+  --muted-foreground: #6b7280;
+}
+
+/* ===================== */
+/* Tailwind theme tokens */
+/* ===================== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ===================== */
+/* Base styles           */
+/* ===================== */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}

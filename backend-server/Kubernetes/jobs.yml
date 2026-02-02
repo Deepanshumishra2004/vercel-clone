@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build-{{PROJECT_ID}}
+spec:
+  ttlSecondsAfterFinished: 100
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: build-server
+          image: deepanshumishra2004/build2:latest
+          imagePullPolicy: Always
+
+          env:
+            - name: GIT_REPO
+              value: "{{{GIT_REPO}}}"
+
+            - name: PROJECT_ID
+              value: "{{PROJECT_ID}}"            
+              
+            - name: DEPLOYMENT_ID
+              value: "{{DEPLOYMENT_ID}}"
+
+            - name: DOMAIN_NAME
+              value: "{{DOMAIN_NAME}}"
+
+            - name: S3_BUCKET
+              value: "vercel-system"
+
+            - name: ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: accessKeyId
+
+            - name: SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secrets
+                  key: secretAccessKey

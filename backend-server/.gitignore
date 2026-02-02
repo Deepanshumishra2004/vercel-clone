@@ -1,0 +1,9 @@
+.env
+
+/src/generated/prisma
+
+kafka.pem
+
+node_modules
+
+dist
